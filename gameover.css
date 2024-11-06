@@ -1,0 +1,35 @@
+.gameOver{
+    font-size: 100px;
+    text-align: center;
+    margin: 0px;
+}
+
+
+.scoreP{
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+body{
+    background-color:black;
+    margin:0;
+    color:red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button{
+    background-color: gray;
+    color:white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: darkgrey;
+}
