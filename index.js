@@ -176,8 +176,18 @@ class Asteriod{
     }
 };
 
-//creating some asteriods
-const intervalId =window.setInterval(()=>{
+//default speed multiplier
+let asteroidSpeedMultiplier =1;
+let intervalId;
+let asteroidInterval = 3000;
+
+//spawning asteroids
+function spawnAsteroids(){
+    //clearing the interval
+    clearInterval(intervalId);
+
+    //setting the interval
+    intervalId = setInterval(()=>{
     const index = Math.floor(Math.random() * 4);
     let x,y; 
     let vx, vy
@@ -188,51 +198,95 @@ const intervalId =window.setInterval(()=>{
         case 0: 
             x = 0 -radius;
             y = Math.random() * canvas.height;
-            vx = Math.random() * 2 + 1; // random velocity between 1 and 3
-            vy = Math.random() * 2 - 1; // random velocity between -1 and 1
+            vx = (Math.random() * 2 + 1) * asteroidSpeedMultiplier; // random velocity between 1 and 3
+            vy = (Math.random() * 2 - 1) * asteroidSpeedMultiplier; // random velocity between -1 and 1
             break;
 
         //bottom
         case 1:
             x = Math.random() * canvas.width;
             y = canvas.height + radius;
-            vx= Math.random() * 2 - 1; // random velocity between -1 and 1
-            vy= Math.random() * -2 - 1; // random velocity between -1 and -3
+            vx= (Math.random() * 2 - 1) * asteroidSpeedMultiplier; // random velocity between -1 and 1
+            vy= (Math.random() * -2 - 1)* asteroidSpeedMultiplier; // random velocity between -1 and -3
             break;
         
         //right
         case 2:
             x = canvas.width + radius;
             y = Math.random() * canvas.height;
-            vx= Math.random() * -2 - 1; // random velocity between -1 and -3
-            vy= Math.random() * 2 - 1; // random velocity between -1 and 1
+            vx= (Math.random() * -2 - 1) * asteroidSpeedMultiplier; // random velocity between -1 and -3
+            vy= (Math.random() * 2 - 1) * asteroidSpeedMultiplier; // random velocity between -1 and 1
             break;
 
         //top
         case 3:
             x= Math.random()* canvas.width;
             y = 0 - radius;
-            vx= Math.random() * 2 - 1; // random velocity between -1 and 1
-            vy = Math.random() * 2 + 1; // random velocity between 1 and 3
+            vx= (Math.random() * 2 - 1) * asteroidSpeedMultiplier; // random velocity between -1 and 1
+            vy = (Math.random() * 2 + 1) * asteroidSpeedMultiplier; // random velocity between 1 and 3
             break;
     }
     asteroids.push(new Asteriod({
-        position:{
-            x: x,
-            y: y,
-        },
+        position:{x ,y},
         velocity:{
             x: vx,
             y: vy,
         },
         radius,
     
+    }));
+    }, asteroidInterval);
+}
+
+
+//start spawning asteroids
+spawnAsteroids();
+
+
+//asteroid speed multiplier
+document.addEventListener('DOMContentLoaded', () => {
+    //double speed button
+    document.getElementById('doubleSpeed').addEventListener('click', () =>{
+        //limiting the max speed
+        if(asteroidSpeedMultiplier < 4){
+            //multiply the speed by 2
+            asteroidSpeedMultiplier *=2;
+            //halve the interval time
+            asteroidInterval /=2;
+            //logging message to the console
+            console.log(`Speed Multiplier: ${asteroidSpeedMultiplier}`);
+            console.log(`Interval: ${asteroidInterval / 1000 } seconds`);
+        }else{
+            console.log('Speed is already at the maximum');
+        }
     })
-)
+    //half speed button 
+    document.getElementById('halfSpeed').addEventListener('click', ()=>{
+        //limiting the min speed
+        if(asteroidSpeedMultiplier > .25){
+            //halve the speed
+            asteroidSpeedMultiplier /=2;
+            //logging a message to the console
+            console.log(`Speed Multiplier: ${asteroidSpeedMultiplier}`);
+            //if the interval is less than 3 seconds
+            if(asteroidInterval < 3000) {
+                asteroidInterval *=2;
+                console.log(`Interval: ${asteroidInterval / 1000} seconds`);
+            }
+        }else{
+            console.log('Speed is already at the minimum');
+        }
+    })
 
+    //reset speed button
+    document.getElementById('resetSpeed').addEventListener('click', ()=>{
+        //reset the speed
+        asteroidSpeedMultiplier = 1;
+        //logging a message to the console
+        console.log(`Speed Multiplier: ${asteroidSpeedMultiplier}`);
 
-//every 3 seconds    
-}, 3000);
+    });
+});
 
 
 

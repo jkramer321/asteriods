@@ -1,8 +1,43 @@
-<style>
-    body {
-        margin: 0;
-    }
-</style>
+<html>
+    <head>
+        <title>Asteriods Game</title>
+        <style>
+            body {
+                margin: 0;
+                }
 
-<canvas> </canvas>
-<script src="./index.js"></script>
+            canvas {
+                display:block;
+            }
+            .controls{
+                position:absolute;
+                bottom: 10px;
+                right: 10px;
+                display:flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button{
+                background-color:gray;
+                color:white;
+                border:none;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            button:hover{
+                background-color: darkgray;
+            }
+        </style>
+</head>
+<body>
+    <canvas> </canvas>
+    <div class="controls">
+        <button id="doubleSpeed">Double Speed</button>
+        <button id="halfSpeed">Half Speed</button>
+        <button id="resetSpeed">Reset Speed</button>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
