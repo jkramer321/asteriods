@@ -7,10 +7,15 @@
 </head>
 <body>
     <h1 className= "gameOver">Game Over</h1>
-    <p className = "scoreP">Your score is: <span id="score"></span></p>
+    <p class = "scoreP">Your score is: <span id="score"></span></p>
+    <p class = "scoreP">High score: <span id="highScore"></span></p>
     <script>
         const score = localStorage.getItem('finalScore'); // Retrieve score
         document.getElementById('score').textContent = score || 0; // Display score or 0 if no score
+
+        //high score information
+        const highScore = localStorage.getItem('highScore');
+        document.getElementById('highScore').textContent = highScore || 0;
     </script>
 
     <button onclick="window.location.href = './index.html';">Play Again</button>

@@ -388,7 +388,17 @@ function animate(){
 
         if(circleTriangleCollision(asteriod, player.getVertices())){
             console.log('Game Over');
-            localStorage.setItem('finalScore', score); // Store score
+            //check and update the high score
+            const highScore = localStorage.getItem('highScore') || 0;
+            if(score > highScore){
+                //update the high score
+                localStorage.setItem('highScore', score);
+                //printing a message
+                console.log('New High Score!!!');
+            }
+            // Store score
+            localStorage.setItem('finalScore', score); 
+            //logging the game over score
             console.log('Game Over');
             window.cancelAnimationFrame(animationId);
             clearInterval(intervalId);
