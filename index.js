@@ -451,6 +451,10 @@ animate()
 
 //when key pressed
 window.addEventListener('keydown', (event)=>{
+    //Ignore keydown events on buttons
+    if (event.target.tagName === 'BUTTON') {
+        return;
+    }
     switch(event.code){
         //moving up
         case 'KeyW':
