@@ -366,6 +366,10 @@ function animate(){
     ctx.font = '24px Arial';
     ctx.fillText(`Score: ${score}`, 10 ,30);
 
+    //displaying the high score in the top right corner
+    const highScore = localStorage.getItem('highScore') || 0;
+    ctx.fillText(`High Score: ${highScore}`, canvas.width - 200, 30);
+
     //to render out the projectiles
     for(let i = 0; i < projectiles.length; i++){
         projectiles[i].update();
